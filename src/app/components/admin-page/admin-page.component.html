@@ -1,0 +1,137 @@
+<div class="back">
+  <div class="page" *ngIf="userService.userId==0;else noAdmin">
+
+    <!-- FLOWER TABLE -->
+    <div class="col-lg-4 col-md-4 col-sm-6" style="padding-bottom: 15px">
+      <input [(ngModel)]="searchFlowerTerm" placeholder="Search flower by name." style="color:aquamarine" />
+      <mat-accordion>
+        <mat-expansion-panel class="transparent-background">
+          <mat-expansion-panel-header>
+            <mat-panel-title style="text-align: center">
+              <span style="font-size: 18px;color:rgb(9, 190, 121)">
+                <b>Add new flower</b>
+              </span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+            <span>Input item name:</span>
+            <input #newName matInput>
+            <span>Input new price:</span>
+            <input #newPrice matInput type="number">
+            <span>Input new amount:</span>
+            <input #newAmount matInput type="number">
+            <button type="button" class="btn btn-success btn-sm" (click)="flowerAdd(newName.value,newPrice.value,newAmount.value)">Add item.</button>
+          </div>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel class="transparent-background" *ngFor="let flower of flowerData | flowerSearch : searchFlowerTerm ">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <b>Id: {{flower.id}} | Name: {{flower.name}} | Price:{{flower.price}} | Amount:{{flower.amount}} </b>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+
+          <div>
+            <span>Input new price:</span>
+            <input #newPrice matInput type="number">
+            <span>Input new amount:</span>
+            <input #newAmount matInput type="number">
+            <button type="button" class="btn btn-success btn-sm" (click)="flowerEdit(flower,newPrice.value,newAmount.value)">Accept changes.</button>
+            <button type="button" class="btn btn-danger btn-sm" (click)="flowerRemove(flower)">Delete item.</button>
+          </div>
+
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+    <!-- USER TABLE-->
+    <div class="col-lg-4 col-md-4 col-sm-6" style="padding-bottom: 15px">
+      <input [(ngModel)]="searchUserTerm" placeholder="Search user by name." style="color:aquamarine" />
+      <mat-accordion>
+        <mat-expansion-panel class="transparent-background">
+          <mat-expansion-panel-header>
+            <mat-panel-title style="text-align: center">
+              <span style="font-size: 18px;color:rgb(9, 190, 121)">
+                <b>Add new user</b>
+              </span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+            <span>Input user name:</span>
+            <input #newUserName matInput>
+            <span>Input new password:</span>
+            <input #newPassword matInput>
+            <span>Input new mail:</span>
+            <input #newMail matInput>
+            <button type="button" class="btn btn-success btn-sm" (click)="userAdd(newUserName.value,newPassword.value,newMail.value)">Add user.</button>
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel class="transparent-background" *ngFor="let user of userData| userSearch:searchUserTerm">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <b>Id: {{user.id}} | Name: {{user.login}} | Pass.:{{user.password}} | Mail:{{user.mail}} </b>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+            <span>Input user new name:</span>
+            <input #new2Name matInput>
+            <span>Input new password:</span>
+            <input #new2Password matInput>
+            <span>Input new mail:</span>
+            <input #new2Mail matInput>
+            <button type="button" class="btn btn-success btn-sm" (click)="userEdit(user,new2Name.value,new2Password.value,new2Mail.value)">Accept.</button>
+            <button *ngIf="user.id!=0" type="button" class="btn btn-danger btn-sm" (click)="userRemove(user)">Delete user.</button>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+
+    <!-- BASKET(ORDERS) TABLE-->
+    <div class="col-lg-4 col-md-4 col-sm-6">
+      <input [(ngModel)]="searchRecordTerm" placeholder="Search record by client id." style="color:aquamarine" />
+      <mat-accordion>
+        <mat-expansion-panel class="transparent-background">
+          <mat-expansion-panel-header>
+            <mat-panel-title style="text-align: center">
+              <span style="font-size: 18px;color:rgb(9, 190, 121)">
+                <b>Add new record</b>
+              </span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+            <span>Input userId:</span>
+            <input #userId matInput type="number">
+            <span>Input productId:</span>
+            <input #productId matInput type="number">
+            <span>Input product amount:</span>
+            <input #newProdAmount matInput type="number">
+            <button type="button" class="btn btn-success btn-sm" (click)="tabAdd(userId.value,productId.value,newProdAmount.value)">Add item.</button>
+          </div>
+        </mat-expansion-panel>
+        <mat-expansion-panel class="transparent-background" *ngFor="let tab of userTabData | recordSearch : searchRecordTerm">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <b>ClientId: {{tab.clientId}} | productId: {{tab.productId}} | Amount:{{tab.productAmount}}</b>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <div>
+            <span>Input product amount:</span>
+            <input #new2ProdAmount matInput type="number">
+            <button type="button" class="btn btn-success btn-sm" (click)="tabEdit(tab,new2ProdAmount.value)">Set amount.</button>
+            <button type="button" class="btn btn-danger btn-sm" (click)="tabRemove(tab)">Delete item.</button>
+          </div>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+
+
+  <ng-template #noAdmin>
+    <div class="page ">
+      <mat-card class="transparent-background">
+        <b>
+          <h1 style="color:rgb(75, 128, 158);text-align: center">Available for admin only</h1>
+        </b>
+      </mat-card>
+    </div>
+  </ng-template>

@@ -1,0 +1,37 @@
+<div class="back">
+
+  <div class="page">
+    <mat-card class="transparent-background">
+      <h1 class="simpleText" style="font-size: 35px">Create new account</h1>
+      <form action="/action_page.php">
+        <div class="form-group">
+          <label for="usr" class="simpleText">Login:</label>
+          <input #loginInput type="text" class="form-control" id="usr" [(ngModel)]="loginIn" name="loginIn" style="color:rgb(255, 255, 255)"
+            placeholder="Enter new user's name">
+        </div>
+        <div class="form-group">
+          <label for="pwd" class="simpleText">Password:</label>
+          <input #passInput type="password" class="form-control" id="pwd" [(ngModel)]="passwdIn" name="passwdIn" style="color:rgb(255, 255, 255)"
+            placeholder="Enter new user's password">
+        </div>
+        <div class="form-group">
+          <label for="mail" class="simpleText">Email:</label>
+          <input #mailInput type="email" class="form-control" id="mail" [(ngModel)]="mailIn" name="mailIn" style="color:rgb(255, 255, 255)"
+            placeholder="Enter new user's email">
+        </div>
+        <div style="text-align: right">
+          <span style="text-align: left" class="simpleText">{{message}}</span>
+          <div *ngIf="loginIn==''||passwdIn==''||mailIn=='';else activeButton">
+            <button type="button" class="btn disableBtn buttonShadow">Create account</button>
+          </div>
+          <ng-template #activeButton class="form-group" >
+            <button type="submit" class="btn btn-primary buttonShadow" (click)="createUser(loginInput.value,passInput.value,mailInput.value)">Create account</button>
+          </ng-template>
+        </div>
+      </form>
+    </mat-card>
+  </div>
+
+  <div *ngFor="let user of users">
+    {{addUserToList(user)}}
+  </div>

@@ -1,0 +1,33 @@
+<div class="container" class="back">
+  <div class="page">
+
+    <mat-card class="transparent-background">
+      <h1 class="simpleText" style="font-size: 35px;">Sign in</h1>
+      <form>
+        <div class="form-group">
+          <label for="usr" class="simpleText">Login:</label>
+          <input [(ngModel)]="logInput" name="logInput" #log type="text" class="form-control" style="color:rgb(255, 255, 255)" placeholder="Enter user name"
+            id="usr">
+        </div>
+        <div class="form-group">
+          <label for="pwd" class="simpleText">Password:</label>
+          <input [(ngModel)]="passInput" name="passInput" #pass type="password" class="form-control" id="pwd" style="color:rgb(255, 255, 255)"
+            placeholder="Enter password" name="pswd">
+        </div>
+        <div style="text-align: right">
+          <span class="simpleText" style="text-align:left">{{message}}</span>
+          <div *ngIf="logInput == ''||passInput=='';else activebutton">
+            <button type="submit" class="btn disable buttonShadow" style="background-color: rgb(131, 131, 131)">Submit</button>
+          </div>
+          <ng-template #activebutton>
+            <button type="submit" class="btn btn-primary buttonShadow" (click)="enterUser(log.value,pass.value)">Submit</button>
+          </ng-template>
+        </div>
+      </form>
+    </mat-card>
+
+
+
+
+  </div>
+</div>

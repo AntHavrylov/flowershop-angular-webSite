@@ -1,0 +1,52 @@
+<div>
+  <nav class="navbar navbar-fixed-top transparent-background ">
+    <div class="container-fluid">
+      <ul>
+        <li>
+          <a style="font-size: 180%;font-family: Courgette-Regular;" routerLink="" class="hidden-sm hidden-xs">
+            FlowerStore
+          </a>
+          <a style="font-size: 80%;font-family: Courgette-Regular;" routerLink="" class="hidden-lg hidden-md">
+            <img src="../../../assets/img/flower.png" style="width: 24px">
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-right">
+        <li routerLinkActive="active current" *ngIf="userService.userId==0">
+          <a routerLink="admin" style="font-size:14px">
+            <img src="../../../assets/img/gear.png" style="width: 18px">
+            <span class="hidden-sm hidden-xs">Control Panel</span>
+          </a>
+        </li>
+        <li routerLinkActive="active current" *ngIf="userService.userId!=null">
+          <a routerLink="basket" style="font-size:14px">
+            <img src="../../../assets/img/cart.png" style="width: 25px">
+            <span class="hidden-sm hidden-xs">Orders</span> [{{ cart.amount }}]</a>
+        </li>
+        <li *ngIf="userService.userId==null;else logined">
+          <a routerLink="Login" style="font-size:14px">
+            <span class="glyphicon glyphicon-log-in">
+              <span class="hidden-sm hidden-xs"> LogIn</span>
+            </span>
+          </a>
+        </li>
+        <ng-template #logined>
+          <li>
+            <a routerLink="Login" style="font-size:14px">
+              <span class="glyphicon glyphicon-log-out" (click)="logOut()">
+                <span class="hidden-sm hidden-xs">{{ userService.userName | uppercase }} LogOut</span>
+              </span>
+            </a>
+          </li>
+        </ng-template>
+        <li *ngIf="userService.userId==null">
+          <a routerLink="signUp" style="font-size:14px">
+            <span class="glyphicon glyphicon-user">
+              <span class="hidden-sm hidden-xs"> Join</span>
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>

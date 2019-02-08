@@ -1,0 +1,7 @@
+<div style="padding:10%">
+  <input [(ngModel)]="searchText">
+  <div *ngFor="let name of names | filterInfo : searchText">
+    {{name}}
+  </div>
+</div>
+

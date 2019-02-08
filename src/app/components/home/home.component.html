@@ -1,0 +1,55 @@
+<div class="back">
+  <div class="page">
+
+    <!-- PRODUCT CART -->
+
+    <div *ngFor="let flower of flowers" class="col-xs-12 col-sm-6 col-md-4 col-lg-3" style="height: 350px;text-align: center">
+      <mat-card class="transparent-background " style="height: 340px;">
+        <div style="text-align: center">
+          <img class="glowImage " src="http://www.namesofflowers.net/images/{{flower.name}}.jpg" alt="flower.name" />
+        </div>
+        <div id="nameFlower">{{flower.name | uppercase}}</div>
+        <div>
+          <div id="info"> Price: {{flower.price}}$</div>
+          <div *ngIf="flower.amount > 0; else amountZero" id="info">
+            Amount: {{ flower.amount }} in stock
+          </div>
+          <ng-template #amountZero>
+            <div id="info">Amount: Out of stock</div>
+
+          </ng-template>
+          <div *ngIf="userService.userId!=null;else getIn" id="info">
+            <div *ngIf="getAmItem(flower) == 0;else bigThenZero">
+              <div *ngIf="(flower.amount - getAmItem(flower))!=0;else disableAdd">
+                <button class="btn btn-danger btn-sm buttonShadow" (click)="addToCart(flower)">Add to cart</button>
+              </div>
+              <ng-template #disableAdd>
+                <button class="btn disable btn-sm buttonShadow" style="background-color: rgb(177, 176, 176)">Out of Stock</button>
+              </ng-template>
+            </div>
+            <ng-template #bigThenZero>
+              <div *ngIf="(flower.amount-getAmItem(flower))!=0;else dsblPLus">
+                <div class="btn-group btn-group-lg">
+                  <button type="button" class="btn btn-danger  buttonShadow" (click)="addToCart(flower)">+</button>
+                  <button type="button" class="btn btn-default buttonShadow">{{getAmItem(flower)}}</button>
+                  <button type="button" class="btn btn-danger buttonShadow" (click)="remItem(flower)">-</button>
+                </div>
+              </div>
+              <ng-template #dsblPLus>
+                <div class="btn-group btn-group-lg">
+                  <button type="button" class="btn disable  buttonShadow" style="background-color: rgb(177, 176, 176)">+</button>
+                  <button type="button" class="btn btn-default buttonShadow">{{getAmItem(flower)}}</button>
+                  <button type="button" class="btn btn-danger buttonShadow" (click)="remItem(flower)">-</button>
+                </div>
+              </ng-template>
+            </ng-template>
+          </div>
+          <ng-template #getIn>
+
+          </ng-template>
+        </div>
+      </mat-card>
+    </div>
+
+  </div>
+</div>

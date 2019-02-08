@@ -1,0 +1,32 @@
+.back
+{
+    background: url('../../../assets/img/w1.jpg');
+    -webkit-background-size:cover;
+    transition: all ls ease-in-out;
+    height: 100vh;
+    color: rgb(255, 255, 255);
+    font-size: 20px;
+    margin: 0%
+}
+
+.simpleText{
+  font-family: DancingScript-Bold;
+  font-size: 23px;
+  color: antiquewhite; 
+}
+.buttonShadow:hover {
+  box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+}
+.page{
+  padding-top: 10%;
+  margin-left: 25%;
+  margin-right: 25%;
+
+}
+.transparent-background { 
+  background-color: rgba(0, 0, 0, 0.3); 
+}
+
+.disableBtn{
+  background-color: darkgrey;
+}

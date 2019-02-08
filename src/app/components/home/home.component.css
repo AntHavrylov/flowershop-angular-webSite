@@ -1,0 +1,54 @@
+#nameFlower {
+    font-family: GloriaHallelujah;
+    font-size: 23px;
+    color:rgb(238, 196, 255);
+    text-align: center;
+}
+
+#info {
+    font-family: Courgette-Regular;
+    font-size: 17px;
+    color:rgb(136, 207, 248);
+    text-align: center;
+}
+
+.card-stl {
+    max-height: 100px;
+    max-width: 100px;
+  }
+
+
+.back {
+    background-image: url('../../../assets/img/w2.jpg');
+    min-height: 700px;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    overflow-x: hidden;
+}
+
+
+.buttonShadow:hover {
+    box-shadow: 0 12px 16px 0 rgba(0, 0, 0, 0.123),0 17px 10px 0 rgba(0, 0, 0, 0.075);
+}
+
+
+.page {
+  padding-top: 130px;
+  margin-left: 10%;
+  margin-right: 10%;
+  padding-bottom: 1%;
+
+}
+
+.transparent-background { 
+  background-color: rgba(0, 0, 0, 0.3); 
+}
+
+.glowImage {
+  box-shadow: 0px 0px 25px rgb(255, 220, 241);
+  border-radius: 10%;
+}

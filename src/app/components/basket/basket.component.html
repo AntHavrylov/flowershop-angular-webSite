@@ -1,0 +1,149 @@
+<div class="back">
+    <div class="page">
+        <div *ngIf="cart.amount==0;else stuff">
+            <mat-card class="transparent-background">
+                <div class="simpleText">Shopping cart is empty.</div>
+            </mat-card>
+        </div>
+        <ng-template #stuff>
+            <mat-card class="transparent-background stuffcart" style="text-align: center">
+                <table class="table table-hover">
+                    <thead class="simpleText">
+                        <tr>
+                            <div class="col-lg-3 col-md-3 col-sm-6">
+                                <th></th>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6">
+                                <th>
+                                    <div class="hidden-md hidden-lg">Items in cart</div>
+                                    <div class="hidden-xs hidden-sm">Item</div>
+                                </th>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6">
+                                <th>
+                                    <div class="hidden-xs hidden-sm">Amount</div>
+                                </th>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6">
+                                <th>
+                                    <div class="hidden-xs hidden-sm">Price</div>
+                                </th>
+                            </div>
+                        </tr>
+                    </thead>
+                    <tbody class="simpleText" style="font-size:16px">
+                        <tr *ngFor="let order of orders" style="vertical-align: center">
+                            <div class="col-lg-3 col-md-3 col-sm-6">
+                                <td>
+                                    <div style="text-align: center">
+                                        <img src="http://www.namesofflowers.net/images/{{order.name}}.jpg" class="img-circle pct glowImage" alt="order.name" />
+                                    </div>
+                                </td>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6">
+                                <td>
+                                    <span>{{order.name | uppercase}}</span>
+                                </td>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6">
+                                <td>
+                                    <div *ngIf="(order.productAmount < order.amount);else dsblPLus" style="margin-left: 0%;margin-right: 0%">
+                                        <div class="btn-group btn-group-xs">
+                                            <button type="button" class="btn btn-danger  buttonShadow" (click)="increaseAmount(order)">+</button>
+                                            <button type="button" class="btn btn-default buttonShadow" style="width: 45px">{{order.productAmount}}</button>
+                                            <button type="button" class="btn btn-danger buttonShadow" (click)="remItem(order)">-</button>
+                                        </div>
+                                    </div>
+                                    <ng-template #dsblPLus>
+                                        <div class="btn-group btn-group-xs">
+                                            <button type="button" class="btn disable  buttonShadow" style="background-color: rgb(177, 176, 176)">+</button>
+                                            <button type="button" class="btn btn-default buttonShadow" style="width: 45px">{{order.productAmount}}</button>
+                                            <button type="button" class="btn btn-danger buttonShadow" (click)="remItem(order)">-</button>
+                                        </div>
+                                    </ng-template>
+                                </td>
+                            </div>
+                            <div class="col-lg-3 col-md-3 col-sm-6 col">
+                                <td>{{order.price*order.productAmount}}$({{order.price}}$ per item)</td>
+                            </div>
+                        </tr>
+                    </tbody>
+                </table>
+            </mat-card>
+        </ng-template>
+        <div>
+            <mat-card class="transparent-background" style="height:70px">
+                <div style="text-align: right">
+                    <span class="simpleText">Total price: {{sum}} $</span>
+                    <button class="btn btn-primary btn-xs buttonShadow" (click)="buyItems()" data-toggle="modal" data-target="#bootstrapModel">buy</button>
+                </div>
+            </mat-card>
+        </div>
+    </div>
+</div>
+
+<!-- Modal section -->
+<div id="bootstrapModel" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Thank You, {{ userService.userName | uppercase }} for your order.</h4>
+            </div>
+            <!-- model body section -->
+            <div class="modal-body">
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <th>
+                                    <div class="hidden-md hidden-lg">Items in cart</div>
+                                    <div class="hidden-xs hidden-sm">Item</div>
+                                </th>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <th>
+                                    <div class="hidden-xs hidden-sm">Amount</div>
+                                </th>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <th>
+                                    <div class="hidden-xs hidden-sm">Price</div>
+                                </th>
+                            </div>
+                        </tr>
+                    </thead>
+                    <tbody style="font-size:16px">
+                        <tr *ngFor="let ch of check" style="vertical-align: center">
+                            <div class="col-lg-4 col-md-4 col-sm-6">
+                                <td>
+                                    <span>{{ch.name | uppercase}}</span>
+                                </td>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col">
+                                <td>
+                                    {{ch.productAmount}}
+                                </td>
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col">
+                                <td>
+                                    {{ch.price}}$
+                                </td>
+                            </div>
+                        </tr>
+                    </tbody>
+                </table>
+
+
+
+
+            </div>
+            <div class="modal-footer">
+                <span>Total: {{ checkSum }} $</span>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
